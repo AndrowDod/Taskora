@@ -53,11 +53,11 @@ namespace ToDo_List
                 }
                 ).AddEntityFrameworkStores<ToDoDbContext>().AddDefaultTokenProviders();
 
-           services.AddTransient<IEmailSender, EmailSender>();
-           services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/Auth/SignIn";
-            });
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.ConfigureApplicationCookie(options =>
+             {
+                 options.LoginPath = "/Auth/SignIn";
+             });
 
 
         }

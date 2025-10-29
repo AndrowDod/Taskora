@@ -5,49 +5,60 @@
 
 <link href="~/css/project-details.css" rel="stylesheet" />
 
-<div class="container">
-    <!-- Project Info -->
-    <div class="project-card">
-        <h1>@Model.Name</h1>
-        <div class="project-meta">
-            <span><strong>Due Date:</strong> @Model.DueDate.ToString("yyyy-MM-dd HH:mm")</span>
-            <span><strong>Active:</strong> @(Model.Tasks?.Count(t => t.IsDone == false) ?? 0)</span>
-            <span><strong>Completed:</strong> @(Model.Tasks?.Count(t => t.IsDone == true) ?? 0)</span>
-            <span>
-                <strong>Progress:</strong>
+<div class="project-container">
+    <div class="project-header">
+        <div class="project-info">
+            <h1>@Model.Name</h1>
+            <div class="meta">
+                <p><i class="fa-solid fa-calendar-days"></i> <strong>Due:</strong> @Model.DueDate.ToString("yyyy-MM-dd HH:mm")</p>
+                <p><i class="fa-solid fa-tasks"></i> <strong>Active:</strong> @(Model.Tasks?.Count(t => !t.IsDone) ?? 0)</p>
+                <p><i class="fa-solid fa-check-circle"></i> <strong>Completed:</strong> @(Model.Tasks?.Count(t => t.IsDone) ?? 0)</p>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <p><strong>Progress</strong></p>
+            <div class="progress-bar">
+                <div class="progress-inner" style="width:@(Model.Tasks != null && Model.Tasks.Count > 0
+                                                                ? (Model.Tasks.Count(t => t.IsDone) * 100.0 / Model.Tasks.Count)
+                                                                : 0)%">
+                </div>
+            </div>
+            <span class="progress-text">
                 @(Model.Tasks != null && Model.Tasks.Count > 0
                                 ? $"{(int)(Model.Tasks.Count(t => t.IsDone) * 100.0 / Model.Tasks.Count)}%"
                                 : "0%")
             </span>
         </div>
-        <div class="progress-bar">
-            <div class="progress-bar-inner" style="width:@(Model.Tasks != null && Model.Tasks.Count > 0
-                                                            ? (Model.Tasks.Count(t => t.IsDone) * 100.0 / Model.Tasks.Count)
-                                                            : 0)%"></div>
-        </div>
-
-        <div class="buttons">
-            <a asp-controller="Project" asp-action="Edit" asp-route-id="@Model.Id" class="btn-edit">Edit</a>
-            <a asp-controller="Project" asp-action="Index" class="btn-back">Back</a>
-        </div>
     </div>
 
-    <!-- Tasks List -->
-    <div class="tasks-section">
+    <div class="action-buttons">
+        <a asp-controller="Project" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-edit">
+            <i class="fa-solid fa-pen"></i> Edit
+        </a>
+        <a asp-controller="Project" asp-action="Index" class="btn btn-back">
+            <i class="fa-solid fa-arrow-left"></i> Back
+        </a>
+    </div>
+
+    <div class="tasks-list">
         <h2>Tasks</h2>
         @if (Model.Tasks != null && Model.Tasks.Any())
         {
             @foreach (var task in Model.Tasks)
             {
-                <div class="task-item">
-                    <span class="task-title">@task.Title</span>
-                    <span class="status @(task.IsDone ? "done" : "not-done")"></span>
+                <div class="task-card @(task.IsDone ? "done" : "")">
+                    <div class="task-title">
+                        <i class="@(task.IsDone ? "fa-solid fa-check-circle" : "fa-regular fa-circle")"></i>
+                        <span>@task.Title</span>
+                    </div>
+                    <span class="status">@((task.IsDone) ? "Completed" : "In Progress")</span>
                 </div>
             }
         }
         else
         {
-            <p>No tasks added yet.</p>
+            <p class="no-tasks">No tasks added yet.</p>
         }
     </div>
 </div>
