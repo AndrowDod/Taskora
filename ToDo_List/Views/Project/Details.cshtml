@@ -1,0 +1,53 @@
+﻿@model ProjectViewModel
+@{
+    ViewData["Title"] = "Project Details";
+}
+
+<link href="~/css/project-details.css" rel="stylesheet" />
+
+<div class="container">
+    <!-- Project Info -->
+    <div class="project-card">
+        <h1>@Model.Name</h1>
+        <div class="project-meta">
+            <span><strong>Due Date:</strong> @Model.DueDate.ToString("yyyy-MM-dd HH:mm")</span>
+            <span><strong>Active:</strong> @(Model.Tasks?.Count(t => t.IsDone == false) ?? 0)</span>
+            <span><strong>Completed:</strong> @(Model.Tasks?.Count(t => t.IsDone == true) ?? 0)</span>
+            <span>
+                <strong>Progress:</strong>
+                @(Model.Tasks != null && Model.Tasks.Count > 0
+                                ? $"{(int)(Model.Tasks.Count(t => t.IsDone) * 100.0 / Model.Tasks.Count)}%"
+                                : "0%")
+            </span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-bar-inner" style="width:@(Model.Tasks != null && Model.Tasks.Count > 0
+                                                            ? (Model.Tasks.Count(t => t.IsDone) * 100.0 / Model.Tasks.Count)
+                                                            : 0)%"></div>
+        </div>
+
+        <div class="buttons">
+            <a asp-controller="Project" asp-action="Edit" asp-route-id="@Model.Id" class="btn-edit">Edit</a>
+            <a asp-controller="Project" asp-action="Index" class="btn-back">Back</a>
+        </div>
+    </div>
+
+    <!-- Tasks List -->
+    <div class="tasks-section">
+        <h2>Tasks</h2>
+        @if (Model.Tasks != null && Model.Tasks.Any())
+        {
+            @foreach (var task in Model.Tasks)
+            {
+                <div class="task-item">
+                    <span class="task-title">@task.Title</span>
+                    <span class="status @(task.IsDone ? "done" : "not-done")"></span>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No tasks added yet.</p>
+        }
+    </div>
+</div>

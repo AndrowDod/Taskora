@@ -1,0 +1,31 @@
+﻿@model TaskViewModel
+@{
+    ViewData["Title"] = "Delete Task";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="~/css/tasks.css" rel="stylesheet" />
+<section class="delete-task-page">
+    <div class="delete-card">
+        <div class="icon-circle">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+
+        <h2>Are you sure?</h2>
+        <p class="warning-text">You’re about to permanently delete this task:</p>
+
+        <h3 class="task-title">@Model.Title</h3>
+
+        <form asp-action="Delete" method="post" class="delete-form">
+            <div class="buttons">
+                <button type="submit" class="btn confirm">
+                    <i class="fa-solid fa-check"></i> Yes, Delete
+                </button>
+                <a asp-action="Index" class="btn cancel">
+                    <i class="fa-solid fa-xmark"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+

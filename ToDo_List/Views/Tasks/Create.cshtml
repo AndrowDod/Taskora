@@ -1,0 +1,47 @@
+﻿@model CreateEditTaskViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<link rel="stylesheet" href="~/css/task-form.css" />
+
+<section class="task-form-page">
+    <div class="card">
+        <h2>Create New Task</h2>
+
+        @* Anti-forgery token *@
+        <form asp-action="Create" method="post" class="task-form" novalidate>
+            @* @Html.AntiForgeryToken() *@
+
+            <partial name="PartialViews/CreateEditTaskPartialView" />
+
+            <div class="form-actions">
+                <button type="submit" class="btn primary">Create</button>
+                <a asp-controller="Home" asp-action="Index" class="btn link">Cancel</a>
+            </div> 
+
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // optional: set min date to today
+        (function () {
+            const dueInput = document.querySelector('input[name="DueDate"]');
+            if (!dueInput) return;
+            const now = new Date();
+            const tzOffset = now.getTimezoneOffset() * 60000;
+            const localISOTime = (new Date(now - tzOffset)).toISOString().slice(0,16);
+            dueInput.min = localISOTime;
+        })();
+    </script>
+}
+
+@section ValidatoinScriptSection {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

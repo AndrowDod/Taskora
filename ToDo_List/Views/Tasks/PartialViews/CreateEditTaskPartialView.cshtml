@@ -1,0 +1,25 @@
+﻿@model CreateEditTaskViewModel
+
+<link rel="stylesheet" href="~/css/task-form.css" />
+
+<div class="form-row">
+    <label asp-for="Title">Title</label>
+    <input asp-for="Title" type="text" maxlength="200" placeholder="Enter task title" />
+    <span asp-validation-for="Title" class="field-validation"></span>
+</div>
+
+<div class="form-row">
+    <label asp-for="DueDate">Due date</label>
+    <input asp-for="DueDate" type="datetime-local" />
+    <span asp-validation-for="DueDate" class="field-validation"></span>
+</div>
+
+<div class="form-row">
+    <label asp-for="ProjectId">Project</label>
+    <select asp-for="ProjectId"
+            asp-items="Model.Projects">
+        <option value="">-- None --</option>
+    </select>
+</div>
+
+

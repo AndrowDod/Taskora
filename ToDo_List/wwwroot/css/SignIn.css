@@ -1,0 +1,24 @@
+﻿.text-danger {
+    color: #ff4d4d !important;
+}
+
+.content .remember {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -16px 0 16px;
+}
+
+.remember label input {
+    accent-color: #fff;
+    margin-right: 4px;
+}
+
+.remember a {
+    color: #fff;
+    text-decoration: none;
+}
+
+    .remember a:hover {
+        text-decoration: underline;
+    }

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ProjectViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+@Html.AntiForgeryToken()
+
+<header class="header">
+    <h1>All Projects</h1>
+
+    <form asp-action="Search" method="get" class="search-box">
+        <input type="text" name="projectName" class="search-input" placeholder="Search project..." />
+        <button type="submit" class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        </button>
+    </form>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="~/css/project.css" rel="stylesheet" />
+</header>
+
+<a asp-action="Create" class="new-project-btn">+ New Project</a>
+<br />
+<br />
+@if (Model.Any())
+{
+    <section id="projects-list" class="projects-list">
+        @foreach (var project in Model)
+        {
+            <div class="project-card" data-id="@project.Id">
+                <div class="project-content">
+                    <h3 class="project-title">@project.Name</h3>
+
+                    <div class="project-meta">
+                        <p class="project-date">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            @project.DueDate.ToString("yyyy-MM-dd")
+                        </p>
+                        <p class="project-tasks">
+                            <i class="fa-solid fa-list-check"></i>
+                            @project.Tasks.Count() @(" task" + (project.Tasks.Count() == 1 ? "" : "s"))
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="project-actions">
+                    <!-- 👁️ زر التفاصيل -->
+                    <a asp-action="Details" asp-route-id="@project.Id" class="action-btn view-btn" title="View Details">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+
+                    <!-- ✏️ زر التعديل -->
+                    <a asp-action="Edit" asp-route-id="@project.Id" class="action-btn edit-btn" title="Edit Project">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+
+                    <!-- 🗑️ زر الحذف -->
+                    <form method="get" asp-action="Delete" asp-route-id="@project.Id" class="delete-form">
+                        <button type="submit" class="action-btn delete-btn" title="Delete Project">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+   
+            </div>
+        }
+    </section>
+}
+else
+{
+    <div class="no-projects">
+        <p>No projects available ): </p>
+    </div>
+}

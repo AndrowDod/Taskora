@@ -1,0 +1,39 @@
+﻿@model ProjectViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!-- استخدم CSS الجديد -->
+<link rel="stylesheet" href="~/css/project-form.css" />
+
+<section class="project-form-page">
+    <div class="project-card">
+        <h2>Edit Project</h2>
+
+        @* Anti-forgery token *@
+        <form asp-action="Edit" method="post" class="project-form" novalidate>
+            @* @Html.AntiForgeryToken() *@
+
+            <div class="form-row">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" type="text" maxlength="200" placeholder="Enter Project Name" />
+                <span asp-validation-for="Name" class="field-validation"></span>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="DueDate">Due date</label>
+                <input asp-for="DueDate" type="datetime-local" />
+                <span asp-validation-for="DueDate" class="field-validation"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn primary">Save</button>
+                <a asp-controller="Project" asp-action="Index" class="btn link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section ValidatoinScriptSection {
+    <partial name="_ValidationScriptsPartial" />
+}

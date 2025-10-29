@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TaskViewModel>
+
+@{
+    ViewData["Title"] = "All Tasks";
+}
+
+@Html.AntiForgeryToken()
+
+<header class="header">
+    <h1>All Tasks</h1>
+
+    <form asp-action="Search" method="get" class="search-box">
+        <input type="text" name="taskTitle" class="search-input" placeholder="Search tasks..." />
+        <button type="submit" class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        </button>
+    </form>
+
+    <link href="~/css/tasks.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</header>
+
+
+@if (Model.Any())
+{
+    <section id="tasks-list" class="tasks-list">
+        @foreach (var task in Model)
+        {
+            <div class="task-card" data-id="@task.Id">
+                <div class="task-content">
+                    <h3 class="task-title @(task.IsDone ? "done" : "")">@task.Title</h3>
+                    <div class="task-meta">
+                        <p class="task-date">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            @task.DueDate.ToString("yyyy-MM-dd")
+                        </p>
+                        <p class="task-project">
+                            <i class="fa-solid fa-folder-open"></i>
+                            @(task.ProjectName == null ? "No Project" : task.ProjectName)
+                        </p>
+
+                        <!-- Delete button -->
+                        <form method="get" asp-action="Delete" asp-route-id="@task.Id" class="delete-form">
+                            <button type="submit" class="delete-btn" title="Delete Task">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+
+                        <!-- Edit button -->
+                        <form method="get" asp-action="Edit" asp-route-id="@task.Id" class="edit-form">
+                            <button type="submit" class="edit-btn" title="Edit Task">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="task-status">
+                    @if (task.IsDone)
+                    {
+                        <span class="status done" data-action="toggle" title="Mark as not done">✔</span>
+                    }
+                    else
+                    {
+                        <span class="status not-done" data-action="toggle" title="Mark as done"></span>
+                    }
+                </div>
+            </div>
+        }
+    </section>
+}
+else
+{
+    <div class="no-tasks">
+        <p>No tasks available ): </p>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/js/tasks.js"></script>
+}

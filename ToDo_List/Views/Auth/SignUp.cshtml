@@ -1,0 +1,45 @@
+﻿@model SignUpViewModel
+@{
+    ViewData["Title"] = "Sign Up";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<style>
+    .text-danger {
+        color: #ff4d4d !important;
+    }
+</style>
+
+<form asp-action="SignUp">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="input-box">
+        <input asp-for="UserName" placeholder="Username" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="input-box">
+        <input asp-for="Email" placeholder="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="input-box">
+        <input type="password" asp-for="Password" id="password" placeholder="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+
+    <div class="input-box">
+        <input type="password" asp-for="ConfirmPassword" id="confirmPassword" placeholder="Confirm Password" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btnn">Sign Up</button>
+
+    <div class="button">
+        <a asp-action="SignIn"><i class="ri-google-fill"></i> Have Account?</a>
+    </div>
+</form>
+
+@section ValidationScriptSection {
+    <partial name="_ValidationScriptsPartial" />
+}

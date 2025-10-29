@@ -1,0 +1,138 @@
+﻿:root {
+    --bg: #f5f8f9;
+    --card: #ffffff;
+    --accent: #5a7fa6;
+    --accent-2: #6ea8a8;
+    --muted: #8b9aa3;
+}
+
+body {
+    background: var(--bg);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #22343a;
+}
+
+.task-form-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.card {
+    width: 100%;
+    max-width: 680px;
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(34,52,58,0.08);
+    padding: 28px;
+}
+
+    .card h2 {
+        margin: 0 0 18px 0;
+        font-size: 20px;
+        color: var(--accent);
+    }
+
+.task-form .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+    .task-form .form-row.inline {
+        flex-direction: row;
+        align-items: center;
+    }
+
+.task-form label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.task-form input[type="text"],
+.task-form input[type="datetime-local"],
+.task-form select {
+    height: 44px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #e0e8ea;
+    font-size: 14px;
+    outline: none;
+    transition: box-shadow .15s, border-color .15s;
+    background: #fff;
+}
+
+    .task-form input[type="text"]:focus,
+    .task-form input[type="datetime-local"]:focus,
+    .task-form select:focus {
+        border-color: var(--accent-2);
+        box-shadow: 0 6px 12px rgba(110,168,168,0.12);
+    }
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    color: #435a63;
+    font-weight: 600;
+}
+
+    .checkbox-label input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+    }
+
+.field-validation {
+    color: #d04545;
+    font-size: 12px;
+    margin-top: 4px;
+    min-height: 16px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    align-items: center;
+}
+
+.btn {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+    .btn.primary {
+        background: var(--accent);
+        color: white;
+        box-shadow: 0 6px 14px rgba(90,127,166,0.12);
+    }
+
+        .btn.primary:hover {
+            transform: translateY(-1px);
+        }
+
+    .btn.link {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid transparent;
+    }
+
+@media (max-width:520px) {
+    .card {
+        padding: 18px;
+    }
+
+    .task-form .form-row {
+        margin-bottom: 12px;
+    }
+}

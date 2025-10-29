@@ -1,0 +1,197 @@
+﻿/* ====== Base Styles ====== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f7f7;
+    color: #2d3e50;
+}
+
+/* ====== Dashboard Layout ====== */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    align-items: stretch;
+}
+
+/* ====== Sidebar ====== */
+.sidebar {
+    width: 240px;
+    background: linear-gradient(180deg, #5a7fa6, #7ca9b9);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 15px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+    position: relative;
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.profile-icon {
+    font-size: 36px;
+    background: white;
+    color: #5a7fa6;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.menu {
+    width: 100%;
+    margin-bottom: 50px; /* 🔹 يضيف مسافة صغيرة أسفل المينيو */
+}
+
+.menu-item {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: background 0.25s ease;
+    font-weight: 500;
+}
+
+    .menu-item:hover,
+    .menu-item.active {
+        background: rgba(255, 255, 255, 0.25);
+    }
+
+/* 🔹 زرار New Task أصبح مباشرة بعد المينيو */
+.new-task-btn {
+    text-decoration: none !important;
+    background: white;
+    color: #5a7fa6;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    text-align: center;
+}
+
+    .new-task-btn:hover {
+        background: #eaf2f2;
+        transform: translateY(-1px);
+    }
+
+/* ====== Main Content ====== */
+.main-content {
+    flex: 1;
+    padding: 40px 60px;
+    background: #f4f7f7;
+    min-height: 100vh;
+}
+
+/* ====== Header ====== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+    .header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #334e68;
+    }
+
+/* ====== Search Box ====== */
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1.5px solid #d1e3e3;
+    border-radius: 12px;
+    padding: 6px 12px;
+    width: 250px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+    .search-box:focus-within {
+        border-color: #6ea8a8;
+        box-shadow: 0 3px 6px rgba(110, 168, 168, 0.2);
+    }
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    color: #333;
+    background: transparent;
+}
+
+    .search-input::placeholder {
+        color: #aaa;
+        font-size: 14px;
+    }
+
+.search-button {
+    background: #6ea8a8;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+    .search-button:hover {
+        background: #588f8f;
+    }
+
+    .search-button svg {
+        width: 18px;
+        height: 18px;
+        color: white;
+    }
+
+/* ====== Tabs ====== */
+.tabs {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.tab {
+    border: none;
+    background: #f4f7f7;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #4c6a7b;
+    transition: all 0.25s;
+}
+
+    .tab:hover {
+        background: #e2eeee;
+    }
+
+    .tab.active {
+        background: #cde4e4;
+        color: #2c444e;
+        font-weight: 600;
+    }

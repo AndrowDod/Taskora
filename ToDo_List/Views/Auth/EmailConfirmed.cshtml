@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div class="success-container">
+    <div class="success-icon">✔</div>
+    <h2>Email Confirmed</h2>
+    <p>Your email has been successfully verified.<br>You can now sign in to your account.</p>
+    <a asp-action="SignIn" class="btnn">Go to Sign In</a>
+</div>
+
+@section Styles {
+    <style>
+        .success-container {
+            width: 300px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(13px);
+            padding: 40px 35px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #fff;
+            animation: fadeIn 0.8s ease-in-out;
+            margin: 120px auto;
+        }
+
+        .success-icon {
+            font-size: 55px;
+            color: #4CAF50;
+            margin-bottom: 18px;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
+        }
+
+        .success-container h2 {
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .success-container p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #eaeaea;
+            margin-bottom: 30px;
+        }
+
+        .btnn {
+            display: inline-block;
+            background: #fff;
+            color: #0a2862;
+            width: 100%;
+            border-radius: 30px;
+            font-size: 16px;
+            height: 45px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 45px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .btnn:hover {
+                background: #a7c7ff;
+                color: #0a2862;
+            }
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+}

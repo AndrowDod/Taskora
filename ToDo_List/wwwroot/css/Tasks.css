@@ -1,0 +1,302 @@
+﻿/* ====== Task Card Design ====== */
+.task-card {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border: 1px solid #e6ecf1;
+    padding: 10px 20px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #eee;
+}
+
+    .task-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+        background: linear-gradient(135deg, #ffffff, #f1f5f9);
+    }
+
+/* ====== Task Content ====== */
+.task-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.task-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    transition: color 0.3s ease;
+}
+
+    .task-title.done {
+        text-decoration: line-through;
+        color: gray !important;
+    }
+
+/* ====== Task Meta ====== */
+.task-meta {
+    font-size: 14px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+}
+
+    .task-meta i {
+        color: #3b82f6;
+        margin-right: 6px;
+    }
+
+    /* نخلي الزر في أقصى اليمين */
+    .task-meta .delete-form {
+        margin-left: auto;
+    }
+
+/* ====== Modern Delete Button (Updated) ====== */
+.delete-btn {
+    background: linear-gradient(135deg, #f9fafb, #f1f5f9);
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+    .delete-btn i {
+        font-size: 17px;
+        display: block;
+        position: relative;
+        top: -1px; /* 👈 التصحيح الحقيقي للتموضع الرأسي */
+        transition: transform 0.25s ease;
+    }
+
+    .delete-btn:hover {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+        border-color: #dc2626;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(239, 68, 68, 0.35);
+    }
+
+        .delete-btn:hover i {
+            transform: rotate(-15deg);
+        }
+
+    .delete-btn:active {
+        transform: scale(0.93);
+    }
+
+/* ====== Modern Confirm Delete Page  ====== */
+.delete-task-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #f8fafc, #eef2f7);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.delete-card {
+    background: #fff;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    animation: fadeIn 0.4s ease;
+}
+
+.icon-circle {
+    background: #fee2e2;
+    color: #dc2626;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    margin: 0 auto 15px;
+    box-shadow: 0 3px 6px rgba(220, 38, 38, 0.25);
+}
+
+.delete-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.warning-text {
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.task-title {
+    font-size: 20px;
+    color: #ef4444;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 22px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+    .btn.confirm {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+    }
+
+        .btn.confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(239, 68, 68, 0.45);
+        }
+
+    .btn.cancel {
+        background: #e2e8f0;
+        color: #334155;
+    }
+
+        .btn.cancel:hover {
+            background: #cbd5e1;
+        }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== Modern Edit Button (Orange Style) ====== */
+.edit-btn {
+    background: linear-gradient(135deg, #f9fafb, #f1f5f9);
+    border: 1px solid #e2e8f0;
+    color: #e6a640; /* برتقالي */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+    .edit-btn i {
+        font-size: 17px;
+        display: block;
+        position: relative;
+        top: -1px;
+        left: 1.8px; /* 👈 زحزحة بسيطة لليمين */
+        transition: transform 0.25s ease;
+    }
+
+    .edit-btn:hover {
+        background: linear-gradient(135deg, #fb923c, #f97316); /* تدرج برتقالي */
+        color: white;
+        border-color: #f97316;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(251, 146, 60, 0.35);
+    }
+
+        .edit-btn:hover i {
+            transform: rotate(-15deg);
+        }
+
+    .edit-btn:active {
+        transform: scale(0.93);
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ====== Status Circles ====== */
+.status {
+    display: inline-block;
+    text-align: center;
+    line-height: 26px;
+    cursor: pointer;
+}
+
+    .status.done {
+        background: #22c55e;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        box-shadow: 0 3px 6px rgba(34, 197, 94, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .status.done:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 10px rgba(34, 197, 94, 0.4);
+        }
+
+    .status.not-done {
+        border: 2px solid #ef4444;
+        color: transparent;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+        .status.not-done:hover {
+            border-color: #dc2626;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+        }
