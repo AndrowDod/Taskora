@@ -100,7 +100,7 @@ namespace ToDo_List.PL.Controllers
                 ModelState.AddModelError("", "Failed to send confirmation email. Please try again later.");
             }
 
-            return View("CheckYourInbox");
+            return RedirectToAction(nameof(CheckYourInbox) , new { actionName = "ResendLink" });
             
         }
 
@@ -150,12 +150,18 @@ namespace ToDo_List.PL.Controllers
                 return View(model);
             }
 
-            await GenerateEmailConfirmationAsync(user);
+            return await GenerateEmailConfirmationAsync(user);
 
-            ViewBag.Message = "Confirmation link has been resent to your email.";
-            return View("CheckYourInbox");
         }
 
+        #endregion
+
+        #region CheckYourInbox
+        public IActionResult CheckYourInbox(string actionName)
+        {
+            TempData["ActionName"] = actionName;    
+            return View();
+        }
         #endregion
 
         #region SignIn
@@ -242,7 +248,8 @@ namespace ToDo_List.PL.Controllers
                     return View(model);
                 }
 
-                return View("CheckYourInbox");
+                return RedirectToAction(nameof(CheckYourInbox), new { actionName = "ForgetPassword" });
+
             }
             else
             {

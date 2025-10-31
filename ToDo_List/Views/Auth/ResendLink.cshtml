@@ -1,8 +1,8 @@
 ﻿@model ResendLinkViewModel
 
 @{
-    ViewData["Title"] = "Resend Confirmation Link";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
+    var actionName = TempData["ActionName"];
 }
 
 <style>
@@ -119,10 +119,10 @@
 
 
 <div class="resend-container">
-    <h2 class="resend-title">Resend Confirmation Link</h2>
-    <p class="resend-text">Enter your registered email address below and we’ll send you a new confirmation link.</p>
+    <h2 class="resend-title">Resend Link</h2>
+    <p class="resend-text">Enter your email address below and we’ll send you a new link.</p>
 
-    <form asp-action="ResendLink" method="post">
+    <form asp-action="@actionName" method="post">
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" asp-for="Email" class="form-control" placeholder="example@email.com" />

@@ -10,7 +10,12 @@
     transition: all 0.3s ease;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
     border-bottom: 1px solid #eee;
+    margin-bottom: 7px;
 }
+
+    .task-card:last-child {
+        margin-bottom: 0; 
+    }
 
     .task-card:hover {
         transform: translateY(-3px);
@@ -78,7 +83,7 @@
         font-size: 17px;
         display: block;
         position: relative;
-        top: -1px; /* 👈 التصحيح الحقيقي للتموضع الرأسي */
+        top: -1px;
         transition: transform 0.25s ease;
     }
 
@@ -224,12 +229,12 @@
         display: block;
         position: relative;
         top: -1px;
-        left: 1.8px; /* 👈 زحزحة بسيطة لليمين */
+        left: 1.8px;
         transition: transform 0.25s ease;
     }
 
     .edit-btn:hover {
-        background: linear-gradient(135deg, #fb923c, #f97316); /* تدرج برتقالي */
+        background: linear-gradient(135deg, #fb923c, #f97316);
         color: white;
         border-color: #f97316;
         transform: translateY(-2px);
@@ -243,19 +248,6 @@
     .edit-btn:active {
         transform: scale(0.93);
     }
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 
 /* ====== Status Circles ====== */
 .status {
