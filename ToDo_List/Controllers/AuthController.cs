@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,13 +16,21 @@ namespace ToDo_List.PL.Controllers
         private readonly IMapper _mapper;
         private readonly IEmailSender _emailSender;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IWebHostEnvironment _env;
 
-        public AuthController(UserManager<IdentityUser> userManager , IMapper mapper , IEmailSender  emailSender , SignInManager<IdentityUser> signInManager)
+        public AuthController
+            (UserManager<IdentityUser> userManager ,
+            IMapper mapper ,
+            IEmailSender  emailSender ,
+            SignInManager<IdentityUser> signInManager ,
+            IWebHostEnvironment env
+            )
         {
            _userManager = userManager;
             _mapper = mapper;
             _emailSender = emailSender;
             _signInManager = signInManager;
+            _env = env;
         }
 
         #region SignUp
@@ -72,36 +81,34 @@ namespace ToDo_List.PL.Controllers
         // Generate email confirmation link and send email with template
         public async Task<IActionResult> GenerateEmailConfirmationAsync(IdentityUser user)
         {
-            
-            // Generate email confirmation token
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            // Generate Url confirmation
+
             var confirmationLink = Url.Action("ConfirmEmail", "Auth",
                 new { userId = user.Id, token = token }, Request.Scheme);
 
-            // Load and populate email template
-            var templatePath = Path.Combine(Directory.GetCurrentDirectory(),
-                     "Views", "Auth", "LinkEmailPage.cshtml");
+            var templatePath = Path.Combine(_env.ContentRootPath, "Views", "Auth", "LinkEmailPage.cshtml");
+
+            if (!System.IO.File.Exists(templatePath))
+            {
+                throw new FileNotFoundException($"Email template not found: {templatePath}");
+            }
 
             var emailHtml = await System.IO.File.ReadAllTextAsync(templatePath);
 
-            // Replace placeholders in the template
             emailHtml = emailHtml.Replace("{{UserName}}", user.UserName)
                                  .Replace("{{ConfirmationLink}}", confirmationLink)
                                  .Replace("{{Confirm}}", "Confirm Email");
 
-
             try
             {
-                 await _emailSender.SendEmailAsync(user.Email, "Confirm your email", emailHtml); 
+                await _emailSender.SendEmailAsync(user.Email, "Confirm your email", emailHtml);
             }
             catch (Exception)
             {
                 ModelState.AddModelError("", "Failed to send confirmation email. Please try again later.");
             }
 
-            return RedirectToAction(nameof(CheckYourInbox) , new { actionName = "ResendLink" });
-            
+            return RedirectToAction(nameof(CheckYourInbox), new { actionName = "ResendLink" });
         }
 
         // Confirm email action

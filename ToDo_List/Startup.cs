@@ -65,6 +65,12 @@ namespace ToDo_List
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ToDoDbContext>();
+                context.Database.Migrate();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -73,6 +79,8 @@ namespace ToDo_List
             {
                 app.UseHsts();
             }
+
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
